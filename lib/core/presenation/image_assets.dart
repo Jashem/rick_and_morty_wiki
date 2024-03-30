@@ -9,6 +9,8 @@ class ImageAssets {
   static String get cast => 'cast'.svg;
   static String get episodes => 'episodes'.svg;
   static String get locations => 'locations'.svg;
+  static String get logo => 'logo'.svg;
+  static String get page_background => 'page_background'.png;
 }
 
 extension on String {
