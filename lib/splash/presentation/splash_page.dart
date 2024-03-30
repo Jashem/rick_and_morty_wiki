@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_wiki/core/presenation/app_colors.dart';
-import 'package:rick_and_morty_wiki/core/presenation/app_text_theme.dart';
-import 'package:rick_and_morty_wiki/core/presenation/extensions.dart';
-import 'package:rick_and_morty_wiki/core/presenation/gaps.dart';
-import 'package:rick_and_morty_wiki/core/presenation/image_assets.dart';
+import '../../core/presenation/app_colors.dart';
+import '../../core/presenation/app_text_theme.dart';
+import '../../core/presenation/extensions.dart';
+import '../../core/presenation/gaps.dart';
+import '../../core/presenation/image_assets.dart';
+import '../../core/presenation/routes/app_router.dart';
 
 @RoutePage()
 class SplashPage extends StatefulWidget {
@@ -15,6 +16,20 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    Future.delayed(
+      const Duration(seconds: 1),
+      () {
+        context.router.pushAndPopUntil(
+          const BottomNavRoute(),
+          predicate: (route) => false,
+        );
+      },
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

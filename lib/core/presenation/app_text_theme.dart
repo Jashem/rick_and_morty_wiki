@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_wiki/core/presenation/app_colors.dart';
+import 'app_colors.dart';
 
 class AppTextTheme {
   static const caption1Strong = TextStyle(

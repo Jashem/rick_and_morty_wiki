@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty_wiki/core/presenation/routes/app_router.dart';
+import 'routes/app_router.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
