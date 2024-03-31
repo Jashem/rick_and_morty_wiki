@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
-import '../../core/presenation/app_text_theme.dart';
 import '../../core/presenation/cast_tile.dart';
 import '../../core/presenation/gaps.dart';
 import '../../core/presenation/page_title.dart';

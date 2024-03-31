@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../core/presenation/app_colors.dart';
-import '../../core/presenation/tab_page_scaffold.dart';
+import '../../core/presenation/page_scaffold.dart';
 import 'bottom_nav_bar.dart';
 import '../../core/presenation/image_assets.dart';
 import '../../core/presenation/routes/app_router.dart';
@@ -41,7 +41,7 @@ class BottomNavPage extends StatelessWidget {
               ),
             ),
           ),
-          body: TabPageScaffold(body: child),
+          body: PageScaffold(body: child),
           bottomNavigationBar: BottomNavBar(
             items: [
               BottomNavItem(

@@ -3,8 +3,8 @@ import 'image_assets.dart';
 
 import 'extensions.dart';
 
-class TabPageScaffold extends StatelessWidget {
-  const TabPageScaffold({super.key, required this.body});
+class PageScaffold extends StatelessWidget {
+  const PageScaffold({super.key, required this.body});
   final Widget body;
 
   @override

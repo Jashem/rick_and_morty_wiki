@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/presenation/cast_tile.dart';
 import '../../core/presenation/gaps.dart';
+import '../../core/presenation/text_tile.dart';
 import 'list_header.dart';
 
 @RoutePage()
@@ -12,7 +13,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(left: 24, right: 24, top: 42),
+      padding: const EdgeInsets.only(
+        left: 24,
+        right: 24,
+        top: 42,
+        bottom: kToolbarHeight + 24,
+      ),
       child: Column(
         children: [
           ListHeader(
@@ -53,6 +59,48 @@ class HomePage extends StatelessWidget {
                 onTap: () {},
               ),
               separatorBuilder: (context, index) => 15.hGap,
+              itemCount: 5,
+            ),
+          ),
+          40.vGap,
+          ListHeader(
+            title: "Locations",
+            onViewAllTap: () {},
+          ),
+          SizedBox(
+            height: 46,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => SizedBox(
+                width: 177,
+                child: TextTile(
+                  onTap: () {},
+                  title: "#1",
+                  subtitle: "Earth (C-137)",
+                ),
+              ),
+              separatorBuilder: (context, index) => 24.hGap,
+              itemCount: 5,
+            ),
+          ),
+          40.vGap,
+          ListHeader(
+            title: "Episodes",
+            onViewAllTap: () {},
+          ),
+          SizedBox(
+            height: 46,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) => SizedBox(
+                width: 177,
+                child: TextTile(
+                  onTap: () {},
+                  title: "S01 E01",
+                  subtitle: "Pilot",
+                ),
+              ),
+              separatorBuilder: (context, index) => 24.hGap,
               itemCount: 5,
             ),
           ),

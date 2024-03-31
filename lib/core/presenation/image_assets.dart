@@ -7,6 +7,7 @@ class ImageAssets {
   static String get splash_thumbnail => 'splash_thumbnail'.png;
   static String get home => 'home'.svg;
   static String get character_box => 'character_box'.svg;
+  static String get text_box => 'text_box'.svg;
   static String get cast => 'cast'.svg;
   static String get episodes => 'episodes'.svg;
   static String get locations => 'locations'.svg;
