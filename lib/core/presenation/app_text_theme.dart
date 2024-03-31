@@ -34,6 +34,13 @@ class AppTextTheme {
     color: AppColors.black,
   );
 
+  static const title4 = TextStyle(
+    fontSize: 10,
+    fontWeight: FontWeight.w600,
+    height: 1.8,
+    color: AppColors.black,
+  );
+
   static const title3 = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w600,
