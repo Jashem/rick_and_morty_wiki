@@ -26,6 +26,7 @@ class CastPage extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 20,
                 crossAxisSpacing: 24,
+                mainAxisExtent: 181,
               ),
               itemBuilder: (context, index) {
                 return CastTile(
