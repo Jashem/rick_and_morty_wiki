@@ -18,11 +18,12 @@ class ImageAssets {
   static String get page_background => 'page_background'.png;
   static String get episode => 'episode'.svg;
   static String get gender => 'gender'.svg;
-  static String get location => 'locstion'.svg;
+  static String get location => 'location'.svg;
   static String get origin => 'origin'.svg;
   static String get share => 'share'.svg;
   static String get species => 'species'.svg;
   static String get status => 'status'.svg;
+  static String get rectangle_box => 'rectangle_box'.svg;
 }
 
 extension on String {
