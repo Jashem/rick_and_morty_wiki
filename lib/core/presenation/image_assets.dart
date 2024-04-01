@@ -12,9 +12,17 @@ class ImageAssets {
   static String get episodes => 'episodes'.svg;
   static String get locations => 'locations'.svg;
   static String get logo => 'logo'.svg;
+  static String get back => 'back'.svg;
   static String get star => 'star'.svg;
   static String get star_fill => 'star_fill'.svg;
   static String get page_background => 'page_background'.png;
+  static String get episode => 'episode'.svg;
+  static String get gender => 'gender'.svg;
+  static String get location => 'locstion'.svg;
+  static String get origin => 'origin'.svg;
+  static String get share => 'share'.svg;
+  static String get species => 'species'.svg;
+  static String get status => 'status'.svg;
 }
 
 extension on String {

@@ -21,10 +21,22 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BottomNavPage(),
       );
     },
+    CastDetailsRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CastDetailsPage(),
+      );
+    },
     CastRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const CastPage(),
+      );
+    },
+    CastRouter.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const CastRouterPage(),
       );
     },
     EpisodesRoute.name: (routeData) {
@@ -69,6 +81,20 @@ class BottomNavRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [CastDetailsPage]
+class CastDetailsRoute extends PageRouteInfo<void> {
+  const CastDetailsRoute({List<PageRouteInfo>? children})
+      : super(
+          CastDetailsRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CastDetailsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [CastPage]
 class CastRoute extends PageRouteInfo<void> {
   const CastRoute({List<PageRouteInfo>? children})
@@ -78,6 +104,20 @@ class CastRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'CastRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [CastRouterPage]
+class CastRouter extends PageRouteInfo<void> {
+  const CastRouter({List<PageRouteInfo>? children})
+      : super(
+          CastRouter.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CastRouter';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
