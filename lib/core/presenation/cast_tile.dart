@@ -51,9 +51,14 @@ class CastTile extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Text(
-                    name,
-                    style: AppTextTheme.title4.copyWith(color: Colors.white),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 24),
+                    child: Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextTheme.title4.copyWith(color: Colors.white),
+                    ),
                   )
                 ],
               ),

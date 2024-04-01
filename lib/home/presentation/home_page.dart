@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cast/application/cast_cubit.dart';
+import '../../cast/domain/cast.dart';
+import '../../core/application/paginated_items/paginated_items_cubit.dart';
 import '../../core/presenation/cast_tile.dart';
 import '../../core/presenation/gaps.dart';
 import '../../core/presenation/page_scaffold.dart';
@@ -46,26 +50,38 @@ class HomePage extends StatelessWidget {
                 itemCount: 5,
               ),
             ),
-            42.vGap,
-            ListHeader(
-              title: "Meet the cast",
-              onViewAllTap: () {},
-            ),
-            SizedBox(
-              height: 137,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => CastTile(
-                  avatar:
-                      "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                  name: "Rick Sanchez",
-                  isFavourite: false,
-                  onFavouriteTap: (value) {},
-                  onTap: () {},
-                ),
-                separatorBuilder: (context, index) => 15.hGap,
-                itemCount: 5,
-              ),
+            BlocBuilder<CastCubit, PaginatedItemsState<Cast>>(
+              builder: (context, state) {
+                final items = context.read<CastCubit>().firstFiveItems;
+                return items.isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          42.vGap,
+                          ListHeader(
+                            title: "Meet the cast",
+                            onViewAllTap: () {
+                              context.navigateTo(const CastRoute());
+                            },
+                          ),
+                          SizedBox(
+                            height: 137,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) => CastTile(
+                                avatar: items[index].image,
+                                name: items[index].name,
+                                isFavourite: false,
+                                onFavouriteTap: (value) {},
+                                onTap: () {},
+                              ),
+                              separatorBuilder: (context, index) => 15.hGap,
+                              itemCount: items.length,
+                            ),
+                          ),
+                        ],
+                      );
+              },
             ),
             40.vGap,
             ListHeader(
