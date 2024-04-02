@@ -21,6 +21,10 @@ class GoogleSigninException extends AppException {
   GoogleSigninException(super.errorCode, super.message);
 }
 
+class LocalStorageException extends AppException {
+  LocalStorageException(super.errorCode, super.message);
+}
+
 class UnknownException extends AppException {
   UnknownException(super.errorCode, super.message);
 }

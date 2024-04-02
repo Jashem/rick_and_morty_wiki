@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cast/application/cast_cubit.dart';
 import '../../cast/infrastructure/cast_repository.dart';
+import '../../favourite_cast/application/favourite_cast_bloc.dart';
+import '../../favourite_cast/infrastructure/favourite_cast_repository.dart';
 import '../shared/dependency_injection.dart';
 import 'routes/app_router.dart';
 
@@ -20,7 +22,13 @@ class _AppWidgetState extends State<AppWidget> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => CastCubit(di.get<CastRepository>()),
+          create: (context) =>
+              CastCubit(di.get<CastRepository>())..getFirstCstPage(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              FavouriteCastBloc(di.get<FavouriteCastRepository>())
+                ..add(const FavouriteCastEvent.fetchedAll()),
         ),
       ],
       child: MaterialApp.router(

@@ -230,7 +230,7 @@ class __$$CastImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$CastImpl implements _Cast {
+class _$CastImpl extends _Cast {
   _$CastImpl(
       {required this.id,
       required this.name,
@@ -242,7 +242,8 @@ class _$CastImpl implements _Cast {
       required this.location,
       required final List<Episode> episode,
       required this.image})
-      : _episode = episode;
+      : _episode = episode,
+        super._();
 
   @override
   final String id;
@@ -315,7 +316,7 @@ class _$CastImpl implements _Cast {
       __$$CastImplCopyWithImpl<_$CastImpl>(this, _$identity);
 }
 
-abstract class _Cast implements Cast {
+abstract class _Cast extends Cast {
   factory _Cast(
       {required final String id,
       required final String name,
@@ -327,6 +328,7 @@ abstract class _Cast implements Cast {
       required final Location location,
       required final List<Episode> episode,
       required final String image}) = _$CastImpl;
+  _Cast._() : super._();
 
   @override
   String get id;

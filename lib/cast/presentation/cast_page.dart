@@ -74,21 +74,13 @@ class CastPage extends StatelessWidget {
                               return state.map(
                                 initial: (_) => CastTile(
                                   padding: const EdgeInsets.all(10),
-                                  avatar: _.items.entity[index].image,
-                                  name: _.items.entity[index].name,
-                                  isFavourite: true,
-                                  onFavouriteTap: (value) {},
-                                  onTap: () {},
+                                  cast: _.items.entity[index],
                                 ),
                                 loadInProgress: (_) {
                                   if (index < _.items.entity.length) {
                                     return CastTile(
                                       padding: const EdgeInsets.all(10),
-                                      avatar: _.items.entity[index].image,
-                                      name: _.items.entity[index].name,
-                                      isFavourite: true,
-                                      onFavouriteTap: (value) {},
-                                      onTap: () {},
+                                      cast: _.items.entity[index],
                                     );
                                   }
                                   return const Center(
@@ -99,19 +91,11 @@ class CastPage extends StatelessWidget {
                                 },
                                 loadSuccess: (_) => CastTile(
                                   padding: const EdgeInsets.all(10),
-                                  avatar: _.items.entity[index].image,
-                                  name: _.items.entity[index].name,
-                                  isFavourite: true,
-                                  onFavouriteTap: (value) {},
-                                  onTap: () {},
+                                  cast: _.items.entity[index],
                                 ),
                                 loadFailure: (_) => CastTile(
                                   padding: const EdgeInsets.all(10),
-                                  avatar: _.items.entity[index].image,
-                                  name: _.items.entity[index].name,
-                                  isFavourite: true,
-                                  onFavouriteTap: (value) {},
-                                  onTap: () {},
+                                  cast: _.items.entity[index],
                                 ),
                               );
                             },

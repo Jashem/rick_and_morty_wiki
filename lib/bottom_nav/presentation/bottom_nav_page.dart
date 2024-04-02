@@ -1,27 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../cast/application/cast_cubit.dart';
 import 'bottom_nav_bar.dart';
 import '../../core/presenation/image_assets.dart';
 import '../../core/presenation/routes/app_router.dart';
 
 @RoutePage()
-class BottomNavPage extends StatefulWidget {
+class BottomNavPage extends StatelessWidget {
   const BottomNavPage({super.key});
-
-  @override
-  State<BottomNavPage> createState() => _BottomNavPageState();
-}
-
-class _BottomNavPageState extends State<BottomNavPage> {
-  @override
-  void initState() {
-    Future.microtask(() {
-      context.read<CastCubit>().getFirstCstPage();
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

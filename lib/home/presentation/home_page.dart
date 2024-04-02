@@ -10,6 +10,7 @@ import '../../core/presenation/gaps.dart';
 import '../../core/presenation/page_scaffold.dart';
 import '../../core/presenation/routes/app_router.dart';
 import '../../core/presenation/text_tile.dart';
+import '../../favourite_cast/application/favourite_cast_bloc.dart';
 import 'list_header.dart';
 
 @RoutePage()
@@ -28,27 +29,35 @@ class HomePage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ListHeader(
-              title: "Favourites",
-              onViewAllTap: () {},
-            ),
-            SizedBox(
-              height: 137,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) => CastTile(
-                  avatar:
-                      "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-                  name: "Rick Sanchez",
-                  isFavourite: true,
-                  onFavouriteTap: (value) {},
-                  onTap: () async {
-                    context.navigateTo(const CastDetailsRoute());
-                  },
-                ),
-                separatorBuilder: (context, index) => 15.hGap,
-                itemCount: 5,
-              ),
+            BlocBuilder<FavouriteCastBloc, FavouriteCastState>(
+              builder: (context, state) {
+                final items =
+                    context.read<FavouriteCastBloc>().state.firstFiveItems;
+                return items.isEmpty
+                    ? const SizedBox()
+                    : Column(
+                        children: [
+                          ListHeader(
+                            title: "Favourites",
+                            onViewAllTap: () {
+                              context.navigateTo(const CastRoute());
+                            },
+                          ),
+                          SizedBox(
+                            height: 137,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) => CastTile(
+                                cast: items[index],
+                              ),
+                              separatorBuilder: (context, index) => 15.hGap,
+                              itemCount: items.length,
+                            ),
+                          ),
+                          42.vGap,
+                        ],
+                      );
+              },
             ),
             BlocBuilder<CastCubit, PaginatedItemsState<Cast>>(
               builder: (context, state) {
@@ -57,7 +66,6 @@ class HomePage extends StatelessWidget {
                     ? const SizedBox()
                     : Column(
                         children: [
-                          42.vGap,
                           ListHeader(
                             title: "Meet the cast",
                             onViewAllTap: () {
@@ -69,11 +77,7 @@ class HomePage extends StatelessWidget {
                             child: ListView.separated(
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context, index) => CastTile(
-                                avatar: items[index].image,
-                                name: items[index].name,
-                                isFavourite: false,
-                                onFavouriteTap: (value) {},
-                                onTap: () {},
+                                cast: items[index],
                               ),
                               separatorBuilder: (context, index) => 15.hGap,
                               itemCount: items.length,

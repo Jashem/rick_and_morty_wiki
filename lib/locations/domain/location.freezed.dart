@@ -90,8 +90,8 @@ class __$$LocationImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LocationImpl implements _Location {
-  _$LocationImpl({required this.name});
+class _$LocationImpl extends _Location {
+  _$LocationImpl({required this.name}) : super._();
 
   @override
   final String name;
@@ -119,8 +119,9 @@ class _$LocationImpl implements _Location {
       __$$LocationImplCopyWithImpl<_$LocationImpl>(this, _$identity);
 }
 
-abstract class _Location implements Location {
+abstract class _Location extends Location {
   factory _Location({required final String name}) = _$LocationImpl;
+  _Location._() : super._();
 
   @override
   String get name;

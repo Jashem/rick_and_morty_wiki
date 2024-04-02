@@ -2,12 +2,15 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../core/domain/info.dart';
 import '../../episodes/domain/episode.dart';
+import '../../episodes/infrastructure/extensions.dart';
 import '../../locations/domain/location.dart';
+import '../infrastructure/cast_dto.dart';
 
 part 'cast.freezed.dart';
 
 @freezed
 class Cast with _$Cast {
+  const Cast._();
   factory Cast({
     required String id,
     required String name,
@@ -20,6 +23,19 @@ class Cast with _$Cast {
     required List<Episode> episode,
     required String image,
   }) = _Cast;
+
+  CastDTO toDTO() => CastDTO(
+        id: id,
+        episode: episode.toDTO(),
+        gender: gender,
+        image: image,
+        location: location.toDTO(),
+        name: name,
+        origin: origin.toDTO(),
+        species: species,
+        status: status,
+        type: type,
+      );
 }
 
 @freezed

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'dio_extensions.dart';
+import 'package:flutter/services.dart' as s;
 import 'exceptions.dart';
 
 Future<T> apiCallWrapper<T>(Future<T> Function() apiCall) async {
@@ -29,6 +30,10 @@ Future<T> apiCallWrapper<T>(Future<T> Function() apiCall) async {
     log(e.toString());
     log(st.toString());
     throw JSONFormatException(1104, "JSON Parsing failed");
+  } on s.PlatformException catch (e, st) {
+    log(e.toString());
+    log(st.toString());
+    throw PlatformException(1106, e.toString());
   } catch (e, st) {
     debugPrint(st.toString());
     debugPrint(e.toString());

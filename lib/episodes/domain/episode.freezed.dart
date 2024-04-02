@@ -99,8 +99,8 @@ class __$$EpisodeImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EpisodeImpl implements _Episode {
-  _$EpisodeImpl({required this.id, required this.name});
+class _$EpisodeImpl extends _Episode {
+  _$EpisodeImpl({required this.id, required this.name}) : super._();
 
   @override
   final String id;
@@ -131,9 +131,10 @@ class _$EpisodeImpl implements _Episode {
       __$$EpisodeImplCopyWithImpl<_$EpisodeImpl>(this, _$identity);
 }
 
-abstract class _Episode implements Episode {
+abstract class _Episode extends Episode {
   factory _Episode({required final String id, required final String name}) =
       _$EpisodeImpl;
+  _Episode._() : super._();
 
   @override
   String get id;
