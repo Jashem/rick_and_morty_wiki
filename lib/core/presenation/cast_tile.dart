@@ -20,9 +20,11 @@ class CastTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        context
-            .navigateTo(CastRouter(children: [CastDetailsRoute(cast: cast)]));
+      onTap: () async {
+        await context.navigateTo(const CastRouter());
+        if (context.mounted) {
+          context.pushRoute(CastDetailsRoute(cast: cast));
+        }
       },
       child: LayoutBuilder(builder: (context, constraints) {
         return Stack(

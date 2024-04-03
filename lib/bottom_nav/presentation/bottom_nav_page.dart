@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import '../../core/presenation/app_colors.dart';
 import 'bottom_nav_bar.dart';
 import '../../core/presenation/image_assets.dart';
 import '../../core/presenation/routes/app_router.dart';
@@ -10,22 +11,24 @@ class BottomNavPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsRouter.pageView(
-      homeIndex: 0,
-      physics: const NeverScrollableScrollPhysics(),
-      animatePageTransition: false,
+    return AutoTabsRouter(
+      lazyLoad: false,
       routes: const [
         HomeRoute(),
         CastRouter(),
         EpisodesRoute(),
         LocationsRoute(),
       ],
-      builder: (context, child, pageController) {
+      duration: Duration.zero,
+      builder: (
+        context,
+        child,
+      ) {
         final tabsRouter = AutoTabsRouter.of(context);
         return Scaffold(
           extendBodyBehindAppBar: true,
           extendBody: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.black,
           body: child,
           bottomNavigationBar: BottomNavBar(
             items: [
