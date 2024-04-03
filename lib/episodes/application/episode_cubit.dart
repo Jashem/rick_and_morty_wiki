@@ -23,7 +23,4 @@ class EpisodeCubit extends PaginatedItemsCubit<Episode> {
       ),
     );
   }
-
-  List<Episode> get firstFiveItems => state.items.entity.sublist(
-      0, state.items.entity.length < 5 ? state.items.entity.length : 5);
 }

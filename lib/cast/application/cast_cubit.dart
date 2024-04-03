@@ -23,7 +23,4 @@ class CastCubit extends PaginatedItemsCubit<Cast> {
       ),
     );
   }
-
-  List<Cast> get firstFiveItems => state.items.entity.sublist(
-      0, state.items.entity.length < 5 ? state.items.entity.length : 5);
 }

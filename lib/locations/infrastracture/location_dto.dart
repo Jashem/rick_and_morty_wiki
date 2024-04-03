@@ -8,10 +8,10 @@ part 'location_dto.g.dart';
 @freezed
 class LocationDTO with _$LocationDTO {
   const LocationDTO._();
-  factory LocationDTO({String? name}) = _LocationDTO;
+  factory LocationDTO({String? name, String? id}) = _LocationDTO;
 
   factory LocationDTO.fromJson(Map<String, dynamic> json) =>
       _$LocationDTOFromJson(json);
 
-  Location toDomain() => Location(name: name ?? "");
+  Location toDomain() => Location(name: name ?? "", id: id.toString());
 }

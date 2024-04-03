@@ -36,8 +36,8 @@ class CastDTO with _$CastDTO {
         species: species ?? "",
         type: type ?? "",
         gender: gender ?? "",
-        origin: origin?.toDomain() ?? Location(name: ""),
-        location: location?.toDomain() ?? Location(name: ""),
+        origin: origin?.toDomain() ?? Location(name: "", id: ""),
+        location: location?.toDomain() ?? Location(name: "", id: ""),
         episode: episode?.toDomain() ?? [],
         image: image ?? "",
       );

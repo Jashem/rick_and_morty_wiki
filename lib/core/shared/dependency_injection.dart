@@ -8,6 +8,8 @@ import '../../episodes/infrastructure/episode_repository.dart';
 import '../../episodes/infrastructure/episode_service.dart';
 import '../../favourite_cast/infrastructure/favourite_cast_repository.dart';
 import '../../favourite_cast/infrastructure/favourite_cast_service.dart';
+import '../../locations/infrastracture/location_repository.dart';
+import '../../locations/infrastracture/location_service.dart';
 import '../infrastructure/constants.dart';
 
 GetIt di = GetIt.instance;
@@ -19,6 +21,8 @@ void setupDI() {
     ..registerSingleton(CastRepository(di.get()))
     ..registerSingleton(EpisodeService(di.get()))
     ..registerSingleton(EpisodeRepository(di.get()))
+    ..registerSingleton(LocationService(di.get()))
+    ..registerSingleton(LocationRepository(di.get()))
     ..registerSingletonAsync(() => SharedPreferences.getInstance())
     ..registerSingleton(FavouriteCastService(di.getAsync()))
     ..registerSingleton(FavouriteCastRepository(di.get()));

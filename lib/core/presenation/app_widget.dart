@@ -9,6 +9,9 @@ import '../../episodes/infrastructure/episode_repository.dart';
 import '../../favourite_cast/application/favourite_cast_bloc.dart';
 import '../../favourite_cast/application/favourite_cast_filter/cast_filter_cubit.dart';
 import '../../favourite_cast/infrastructure/favourite_cast_repository.dart';
+import '../../locations/application/location_cubit.dart';
+import '../../locations/application/location_filter/location_filter_cubit.dart';
+import '../../locations/infrastracture/location_repository.dart';
 import '../shared/dependency_injection.dart';
 import 'routes/app_router.dart';
 
@@ -36,6 +39,9 @@ class _AppWidgetState extends State<AppWidget> {
           create: (context) => EpisodeFilterCubit(),
         ),
         BlocProvider(
+          create: (context) => LocationFilterCubit(),
+        ),
+        BlocProvider(
           create: (context) => CastCubit(
               di.get<CastRepository>(), context.read<CastFilterCubit>())
             ..getFirstCstPage(),
@@ -44,6 +50,11 @@ class _AppWidgetState extends State<AppWidget> {
           create: (context) => EpisodeCubit(
               di.get<EpisodeRepository>(), context.read<EpisodeFilterCubit>())
             ..getFirstEpisodePage(),
+        ),
+        BlocProvider(
+          create: (context) => LocationCubit(
+              di.get<LocationRepository>(), context.read<LocationFilterCubit>())
+            ..getFirstLocationPage(),
         ),
         BlocProvider(
           create: (context) => FavouriteCastBloc(

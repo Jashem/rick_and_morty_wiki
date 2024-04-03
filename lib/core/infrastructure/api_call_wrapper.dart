@@ -18,7 +18,7 @@ Future<T> apiCallWrapper<T>(Future<T> Function() apiCall) async {
       log((e.response?.data).toString());
       throw RestApiException(
         e.response?.statusCode,
-        e.response?.data['message'] ??
+        e.response?.data["errors"][0]["message"] ??
             (e.response?.statusCode == 401
                 ? "Unauthenticated, Please login again!"
                 : "Server Error"),
