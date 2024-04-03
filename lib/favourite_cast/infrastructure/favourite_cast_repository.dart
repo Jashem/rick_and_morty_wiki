@@ -45,36 +45,42 @@ class FavouriteCastRepository {
     }
   }
 
-  Future<Either<Failure, List<Cast>>> saveCast(
-      List<Cast> casts, Cast newCast) async {
-    if (casts.firstWhereOrNull((element) => element.id == newCast.id) == null) {
-      try {
-        final updateRecord = [newCast, ...casts];
-        final _ = await _service.saveFavourite(updateRecord.toDTO());
-        return right(
-          updateRecord,
-        );
-      } on AppException catch (e) {
-        return left(Failure(message: e.message, code: e.errorCode));
+  Future<Either<Failure, Unit>> saveCast(
+    Cast newCast, {
+    String? field,
+    String? value,
+  }) async {
+    try {
+      final favourites = await _service.getFavourites();
+      if (favourites.firstWhereOrNull((element) => element.id == newCast.id) ==
+          null) {
+        final updateRecord = [newCast.toDTO(), ...favourites];
+        final _ = await _service.saveFavourite(updateRecord);
+        return right(unit);
       }
+      return left(Failure(message: "Item already added!"));
+    } on AppException catch (e) {
+      return left(Failure(message: e.message, code: e.errorCode));
     }
-    return left(Failure(message: "Item already added!"));
   }
 
-  Future<Either<Failure, List<Cast>>> removeCast(
-      List<Cast> casts, Cast newCast) async {
-    final findex = casts.indexWhere((element) => element.id == newCast.id);
-    if (findex != -1) {
-      try {
-        final updateRecord = List<Cast>.from(casts)..removeAt(findex);
-        final _ = await _service.saveFavourite(updateRecord.toDTO());
-        return right(
-          updateRecord,
-        );
-      } on AppException catch (e) {
-        return left(Failure(message: e.message, code: e.errorCode));
+  Future<Either<Failure, Unit>> removeCast(
+    Cast newCast, {
+    String? field,
+    String? value,
+  }) async {
+    try {
+      final favourites = await _service.getFavourites();
+      final findex =
+          favourites.indexWhere((element) => element.id == newCast.id);
+      if (findex != -1) {
+        final updateRecord = favourites..removeAt(findex);
+        final _ = await _service.saveFavourite(updateRecord);
+        return right(unit);
       }
+      return left(Failure(message: "Item notf found!"));
+    } on AppException catch (e) {
+      return left(Failure(message: e.message, code: e.errorCode));
     }
-    return left(Failure(message: "Item already added!"));
   }
 }

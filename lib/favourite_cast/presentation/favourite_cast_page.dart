@@ -26,7 +26,9 @@ class _FavouriteCastPageState extends State<FavouriteCastPage> {
   late final TextEditingController _searchController;
   @override
   void initState() {
-    _searchController = TextEditingController();
+    _searchController = TextEditingController(
+      text: context.read<FavouriteCastFilterCubit>().state.value,
+    );
     super.initState();
   }
 
@@ -73,10 +75,10 @@ class _FavouriteCastPageState extends State<FavouriteCastPage> {
               child: BlocBuilder<FavouriteCastBloc, FavouriteCastState>(
                 builder: (context, state) {
                   return (state.when(
-                    initial: (items) => false,
-                    loadInProgress: (items) => false,
-                    loadSuccess: (items) => items.isEmpty,
-                    loadFailure: (items, failure) => false,
+                    initial: (items, _) => false,
+                    loadInProgress: (items, _) => false,
+                    loadSuccess: (items, _) => items.isEmpty,
+                    loadFailure: (items, _, failure) => false,
                   ))
                       ? Center(
                           child: Text(

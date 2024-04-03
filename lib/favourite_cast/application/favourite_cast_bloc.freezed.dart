@@ -662,28 +662,35 @@ abstract class _AddedFavourite implements FavouriteCastEvent {
 /// @nodoc
 mixin _$FavouriteCastState {
   List<Cast> get casts => throw _privateConstructorUsedError;
+  List<Cast> get allCasts => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Cast> casts) initial,
-    required TResult Function(List<Cast> casts) loadInProgress,
-    required TResult Function(List<Cast> casts) loadSuccess,
-    required TResult Function(List<Cast> casts, Failure failure) loadFailure,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts) initial,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadInProgress,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadSuccess,
+    required TResult Function(
+            List<Cast> casts, List<Cast> allCasts, Failure failure)
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Cast> casts)? initial,
-    TResult? Function(List<Cast> casts)? loadInProgress,
-    TResult? Function(List<Cast> casts)? loadSuccess,
-    TResult? Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Cast> casts)? initial,
-    TResult Function(List<Cast> casts)? loadInProgress,
-    TResult Function(List<Cast> casts)? loadSuccess,
-    TResult Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -724,7 +731,7 @@ abstract class $FavouriteCastStateCopyWith<$Res> {
           FavouriteCastState value, $Res Function(FavouriteCastState) then) =
       _$FavouriteCastStateCopyWithImpl<$Res, FavouriteCastState>;
   @useResult
-  $Res call({List<Cast> casts});
+  $Res call({List<Cast> casts, List<Cast> allCasts});
 }
 
 /// @nodoc
@@ -741,11 +748,16 @@ class _$FavouriteCastStateCopyWithImpl<$Res, $Val extends FavouriteCastState>
   @override
   $Res call({
     Object? casts = null,
+    Object? allCasts = null,
   }) {
     return _then(_value.copyWith(
       casts: null == casts
           ? _value.casts
           : casts // ignore: cast_nullable_to_non_nullable
+              as List<Cast>,
+      allCasts: null == allCasts
+          ? _value.allCasts
+          : allCasts // ignore: cast_nullable_to_non_nullable
               as List<Cast>,
     ) as $Val);
   }
@@ -759,7 +771,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Cast> casts});
+  $Res call({List<Cast> casts, List<Cast> allCasts});
 }
 
 /// @nodoc
@@ -774,11 +786,16 @@ class __$$InitialImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? casts = null,
+    Object? allCasts = null,
   }) {
     return _then(_$InitialImpl(
       null == casts
           ? _value._casts
           : casts // ignore: cast_nullable_to_non_nullable
+              as List<Cast>,
+      null == allCasts
+          ? _value._allCasts
+          : allCasts // ignore: cast_nullable_to_non_nullable
               as List<Cast>,
     ));
   }
@@ -787,8 +804,9 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl extends _Initial with DiagnosticableTreeMixin {
-  const _$InitialImpl(final List<Cast> casts)
+  const _$InitialImpl(final List<Cast> casts, final List<Cast> allCasts)
       : _casts = casts,
+        _allCasts = allCasts,
         super._();
 
   final List<Cast> _casts;
@@ -799,9 +817,17 @@ class _$InitialImpl extends _Initial with DiagnosticableTreeMixin {
     return EqualUnmodifiableListView(_casts);
   }
 
+  final List<Cast> _allCasts;
+  @override
+  List<Cast> get allCasts {
+    if (_allCasts is EqualUnmodifiableListView) return _allCasts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_allCasts);
+  }
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FavouriteCastState.initial(casts: $casts)';
+    return 'FavouriteCastState.initial(casts: $casts, allCasts: $allCasts)';
   }
 
   @override
@@ -809,7 +835,8 @@ class _$InitialImpl extends _Initial with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'FavouriteCastState.initial'))
-      ..add(DiagnosticsProperty('casts', casts));
+      ..add(DiagnosticsProperty('casts', casts))
+      ..add(DiagnosticsProperty('allCasts', allCasts));
   }
 
   @override
@@ -817,12 +844,15 @@ class _$InitialImpl extends _Initial with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&
-            const DeepCollectionEquality().equals(other._casts, _casts));
+            const DeepCollectionEquality().equals(other._casts, _casts) &&
+            const DeepCollectionEquality().equals(other._allCasts, _allCasts));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_casts));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_casts),
+      const DeepCollectionEquality().hash(_allCasts));
 
   @JsonKey(ignore: true)
   @override
@@ -833,36 +863,42 @@ class _$InitialImpl extends _Initial with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Cast> casts) initial,
-    required TResult Function(List<Cast> casts) loadInProgress,
-    required TResult Function(List<Cast> casts) loadSuccess,
-    required TResult Function(List<Cast> casts, Failure failure) loadFailure,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts) initial,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadInProgress,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadSuccess,
+    required TResult Function(
+            List<Cast> casts, List<Cast> allCasts, Failure failure)
+        loadFailure,
   }) {
-    return initial(casts);
+    return initial(casts, allCasts);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Cast> casts)? initial,
-    TResult? Function(List<Cast> casts)? loadInProgress,
-    TResult? Function(List<Cast> casts)? loadSuccess,
-    TResult? Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
   }) {
-    return initial?.call(casts);
+    return initial?.call(casts, allCasts);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Cast> casts)? initial,
-    TResult Function(List<Cast> casts)? loadInProgress,
-    TResult Function(List<Cast> casts)? loadSuccess,
-    TResult Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(casts);
+      return initial(casts, allCasts);
     }
     return orElse();
   }
@@ -906,11 +942,14 @@ class _$InitialImpl extends _Initial with DiagnosticableTreeMixin {
 }
 
 abstract class _Initial extends FavouriteCastState {
-  const factory _Initial(final List<Cast> casts) = _$InitialImpl;
+  const factory _Initial(final List<Cast> casts, final List<Cast> allCasts) =
+      _$InitialImpl;
   const _Initial._() : super._();
 
   @override
   List<Cast> get casts;
+  @override
+  List<Cast> get allCasts;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
@@ -925,7 +964,7 @@ abstract class _$$LoadInProgressImplCopyWith<$Res>
       __$$LoadInProgressImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Cast> casts});
+  $Res call({List<Cast> casts, List<Cast> allCasts});
 }
 
 /// @nodoc
@@ -940,11 +979,16 @@ class __$$LoadInProgressImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? casts = null,
+    Object? allCasts = null,
   }) {
     return _then(_$LoadInProgressImpl(
       null == casts
           ? _value._casts
           : casts // ignore: cast_nullable_to_non_nullable
+              as List<Cast>,
+      null == allCasts
+          ? _value._allCasts
+          : allCasts // ignore: cast_nullable_to_non_nullable
               as List<Cast>,
     ));
   }
@@ -954,8 +998,9 @@ class __$$LoadInProgressImplCopyWithImpl<$Res>
 
 class _$LoadInProgressImpl extends _LoadInProgress
     with DiagnosticableTreeMixin {
-  const _$LoadInProgressImpl(final List<Cast> casts)
+  const _$LoadInProgressImpl(final List<Cast> casts, final List<Cast> allCasts)
       : _casts = casts,
+        _allCasts = allCasts,
         super._();
 
   final List<Cast> _casts;
@@ -966,9 +1011,17 @@ class _$LoadInProgressImpl extends _LoadInProgress
     return EqualUnmodifiableListView(_casts);
   }
 
+  final List<Cast> _allCasts;
+  @override
+  List<Cast> get allCasts {
+    if (_allCasts is EqualUnmodifiableListView) return _allCasts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_allCasts);
+  }
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FavouriteCastState.loadInProgress(casts: $casts)';
+    return 'FavouriteCastState.loadInProgress(casts: $casts, allCasts: $allCasts)';
   }
 
   @override
@@ -976,7 +1029,8 @@ class _$LoadInProgressImpl extends _LoadInProgress
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'FavouriteCastState.loadInProgress'))
-      ..add(DiagnosticsProperty('casts', casts));
+      ..add(DiagnosticsProperty('casts', casts))
+      ..add(DiagnosticsProperty('allCasts', allCasts));
   }
 
   @override
@@ -984,12 +1038,15 @@ class _$LoadInProgressImpl extends _LoadInProgress
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadInProgressImpl &&
-            const DeepCollectionEquality().equals(other._casts, _casts));
+            const DeepCollectionEquality().equals(other._casts, _casts) &&
+            const DeepCollectionEquality().equals(other._allCasts, _allCasts));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_casts));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_casts),
+      const DeepCollectionEquality().hash(_allCasts));
 
   @JsonKey(ignore: true)
   @override
@@ -1001,36 +1058,42 @@ class _$LoadInProgressImpl extends _LoadInProgress
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Cast> casts) initial,
-    required TResult Function(List<Cast> casts) loadInProgress,
-    required TResult Function(List<Cast> casts) loadSuccess,
-    required TResult Function(List<Cast> casts, Failure failure) loadFailure,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts) initial,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadInProgress,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadSuccess,
+    required TResult Function(
+            List<Cast> casts, List<Cast> allCasts, Failure failure)
+        loadFailure,
   }) {
-    return loadInProgress(casts);
+    return loadInProgress(casts, allCasts);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Cast> casts)? initial,
-    TResult? Function(List<Cast> casts)? loadInProgress,
-    TResult? Function(List<Cast> casts)? loadSuccess,
-    TResult? Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
   }) {
-    return loadInProgress?.call(casts);
+    return loadInProgress?.call(casts, allCasts);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Cast> casts)? initial,
-    TResult Function(List<Cast> casts)? loadInProgress,
-    TResult Function(List<Cast> casts)? loadSuccess,
-    TResult Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadInProgress != null) {
-      return loadInProgress(casts);
+      return loadInProgress(casts, allCasts);
     }
     return orElse();
   }
@@ -1074,11 +1137,14 @@ class _$LoadInProgressImpl extends _LoadInProgress
 }
 
 abstract class _LoadInProgress extends FavouriteCastState {
-  const factory _LoadInProgress(final List<Cast> casts) = _$LoadInProgressImpl;
+  const factory _LoadInProgress(
+      final List<Cast> casts, final List<Cast> allCasts) = _$LoadInProgressImpl;
   const _LoadInProgress._() : super._();
 
   @override
   List<Cast> get casts;
+  @override
+  List<Cast> get allCasts;
   @override
   @JsonKey(ignore: true)
   _$$LoadInProgressImplCopyWith<_$LoadInProgressImpl> get copyWith =>
@@ -1093,7 +1159,7 @@ abstract class _$$LoadSuccessImplCopyWith<$Res>
       __$$LoadSuccessImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Cast> casts});
+  $Res call({List<Cast> casts, List<Cast> allCasts});
 }
 
 /// @nodoc
@@ -1108,11 +1174,16 @@ class __$$LoadSuccessImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? casts = null,
+    Object? allCasts = null,
   }) {
     return _then(_$LoadSuccessImpl(
       null == casts
           ? _value._casts
           : casts // ignore: cast_nullable_to_non_nullable
+              as List<Cast>,
+      null == allCasts
+          ? _value._allCasts
+          : allCasts // ignore: cast_nullable_to_non_nullable
               as List<Cast>,
     ));
   }
@@ -1121,8 +1192,9 @@ class __$$LoadSuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadSuccessImpl extends _LoadSuccess with DiagnosticableTreeMixin {
-  const _$LoadSuccessImpl(final List<Cast> casts)
+  const _$LoadSuccessImpl(final List<Cast> casts, final List<Cast> allCasts)
       : _casts = casts,
+        _allCasts = allCasts,
         super._();
 
   final List<Cast> _casts;
@@ -1133,9 +1205,17 @@ class _$LoadSuccessImpl extends _LoadSuccess with DiagnosticableTreeMixin {
     return EqualUnmodifiableListView(_casts);
   }
 
+  final List<Cast> _allCasts;
+  @override
+  List<Cast> get allCasts {
+    if (_allCasts is EqualUnmodifiableListView) return _allCasts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_allCasts);
+  }
+
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FavouriteCastState.loadSuccess(casts: $casts)';
+    return 'FavouriteCastState.loadSuccess(casts: $casts, allCasts: $allCasts)';
   }
 
   @override
@@ -1143,7 +1223,8 @@ class _$LoadSuccessImpl extends _LoadSuccess with DiagnosticableTreeMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'FavouriteCastState.loadSuccess'))
-      ..add(DiagnosticsProperty('casts', casts));
+      ..add(DiagnosticsProperty('casts', casts))
+      ..add(DiagnosticsProperty('allCasts', allCasts));
   }
 
   @override
@@ -1151,12 +1232,15 @@ class _$LoadSuccessImpl extends _LoadSuccess with DiagnosticableTreeMixin {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadSuccessImpl &&
-            const DeepCollectionEquality().equals(other._casts, _casts));
+            const DeepCollectionEquality().equals(other._casts, _casts) &&
+            const DeepCollectionEquality().equals(other._allCasts, _allCasts));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_casts));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_casts),
+      const DeepCollectionEquality().hash(_allCasts));
 
   @JsonKey(ignore: true)
   @override
@@ -1167,36 +1251,42 @@ class _$LoadSuccessImpl extends _LoadSuccess with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Cast> casts) initial,
-    required TResult Function(List<Cast> casts) loadInProgress,
-    required TResult Function(List<Cast> casts) loadSuccess,
-    required TResult Function(List<Cast> casts, Failure failure) loadFailure,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts) initial,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadInProgress,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadSuccess,
+    required TResult Function(
+            List<Cast> casts, List<Cast> allCasts, Failure failure)
+        loadFailure,
   }) {
-    return loadSuccess(casts);
+    return loadSuccess(casts, allCasts);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Cast> casts)? initial,
-    TResult? Function(List<Cast> casts)? loadInProgress,
-    TResult? Function(List<Cast> casts)? loadSuccess,
-    TResult? Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
   }) {
-    return loadSuccess?.call(casts);
+    return loadSuccess?.call(casts, allCasts);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Cast> casts)? initial,
-    TResult Function(List<Cast> casts)? loadInProgress,
-    TResult Function(List<Cast> casts)? loadSuccess,
-    TResult Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadSuccess != null) {
-      return loadSuccess(casts);
+      return loadSuccess(casts, allCasts);
     }
     return orElse();
   }
@@ -1240,11 +1330,14 @@ class _$LoadSuccessImpl extends _LoadSuccess with DiagnosticableTreeMixin {
 }
 
 abstract class _LoadSuccess extends FavouriteCastState {
-  const factory _LoadSuccess(final List<Cast> casts) = _$LoadSuccessImpl;
+  const factory _LoadSuccess(
+      final List<Cast> casts, final List<Cast> allCasts) = _$LoadSuccessImpl;
   const _LoadSuccess._() : super._();
 
   @override
   List<Cast> get casts;
+  @override
+  List<Cast> get allCasts;
   @override
   @JsonKey(ignore: true)
   _$$LoadSuccessImplCopyWith<_$LoadSuccessImpl> get copyWith =>
@@ -1259,7 +1352,7 @@ abstract class _$$LoadFailureImplCopyWith<$Res>
       __$$LoadFailureImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Cast> casts, Failure failure});
+  $Res call({List<Cast> casts, List<Cast> allCasts, Failure failure});
 
   $FailureCopyWith<$Res> get failure;
 }
@@ -1276,12 +1369,17 @@ class __$$LoadFailureImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? casts = null,
+    Object? allCasts = null,
     Object? failure = null,
   }) {
     return _then(_$LoadFailureImpl(
       null == casts
           ? _value._casts
           : casts // ignore: cast_nullable_to_non_nullable
+              as List<Cast>,
+      null == allCasts
+          ? _value._allCasts
+          : allCasts // ignore: cast_nullable_to_non_nullable
               as List<Cast>,
       null == failure
           ? _value.failure
@@ -1302,8 +1400,10 @@ class __$$LoadFailureImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadFailureImpl extends _LoadFailure with DiagnosticableTreeMixin {
-  const _$LoadFailureImpl(final List<Cast> casts, this.failure)
+  const _$LoadFailureImpl(
+      final List<Cast> casts, final List<Cast> allCasts, this.failure)
       : _casts = casts,
+        _allCasts = allCasts,
         super._();
 
   final List<Cast> _casts;
@@ -1314,12 +1414,20 @@ class _$LoadFailureImpl extends _LoadFailure with DiagnosticableTreeMixin {
     return EqualUnmodifiableListView(_casts);
   }
 
+  final List<Cast> _allCasts;
+  @override
+  List<Cast> get allCasts {
+    if (_allCasts is EqualUnmodifiableListView) return _allCasts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_allCasts);
+  }
+
   @override
   final Failure failure;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'FavouriteCastState.loadFailure(casts: $casts, failure: $failure)';
+    return 'FavouriteCastState.loadFailure(casts: $casts, allCasts: $allCasts, failure: $failure)';
   }
 
   @override
@@ -1328,6 +1436,7 @@ class _$LoadFailureImpl extends _LoadFailure with DiagnosticableTreeMixin {
     properties
       ..add(DiagnosticsProperty('type', 'FavouriteCastState.loadFailure'))
       ..add(DiagnosticsProperty('casts', casts))
+      ..add(DiagnosticsProperty('allCasts', allCasts))
       ..add(DiagnosticsProperty('failure', failure));
   }
 
@@ -1337,12 +1446,16 @@ class _$LoadFailureImpl extends _LoadFailure with DiagnosticableTreeMixin {
         (other.runtimeType == runtimeType &&
             other is _$LoadFailureImpl &&
             const DeepCollectionEquality().equals(other._casts, _casts) &&
+            const DeepCollectionEquality().equals(other._allCasts, _allCasts) &&
             (identical(other.failure, failure) || other.failure == failure));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_casts), failure);
+      runtimeType,
+      const DeepCollectionEquality().hash(_casts),
+      const DeepCollectionEquality().hash(_allCasts),
+      failure);
 
   @JsonKey(ignore: true)
   @override
@@ -1353,36 +1466,42 @@ class _$LoadFailureImpl extends _LoadFailure with DiagnosticableTreeMixin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<Cast> casts) initial,
-    required TResult Function(List<Cast> casts) loadInProgress,
-    required TResult Function(List<Cast> casts) loadSuccess,
-    required TResult Function(List<Cast> casts, Failure failure) loadFailure,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts) initial,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadInProgress,
+    required TResult Function(List<Cast> casts, List<Cast> allCasts)
+        loadSuccess,
+    required TResult Function(
+            List<Cast> casts, List<Cast> allCasts, Failure failure)
+        loadFailure,
   }) {
-    return loadFailure(casts, failure);
+    return loadFailure(casts, allCasts, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<Cast> casts)? initial,
-    TResult? Function(List<Cast> casts)? loadInProgress,
-    TResult? Function(List<Cast> casts)? loadSuccess,
-    TResult? Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult? Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
   }) {
-    return loadFailure?.call(casts, failure);
+    return loadFailure?.call(casts, allCasts, failure);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<Cast> casts)? initial,
-    TResult Function(List<Cast> casts)? loadInProgress,
-    TResult Function(List<Cast> casts)? loadSuccess,
-    TResult Function(List<Cast> casts, Failure failure)? loadFailure,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? initial,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadInProgress,
+    TResult Function(List<Cast> casts, List<Cast> allCasts)? loadSuccess,
+    TResult Function(List<Cast> casts, List<Cast> allCasts, Failure failure)?
+        loadFailure,
     required TResult orElse(),
   }) {
     if (loadFailure != null) {
-      return loadFailure(casts, failure);
+      return loadFailure(casts, allCasts, failure);
     }
     return orElse();
   }
@@ -1426,12 +1545,14 @@ class _$LoadFailureImpl extends _LoadFailure with DiagnosticableTreeMixin {
 }
 
 abstract class _LoadFailure extends FavouriteCastState {
-  const factory _LoadFailure(final List<Cast> casts, final Failure failure) =
-      _$LoadFailureImpl;
+  const factory _LoadFailure(final List<Cast> casts, final List<Cast> allCasts,
+      final Failure failure) = _$LoadFailureImpl;
   const _LoadFailure._() : super._();
 
   @override
   List<Cast> get casts;
+  @override
+  List<Cast> get allCasts;
   Failure get failure;
   @override
   @JsonKey(ignore: true)

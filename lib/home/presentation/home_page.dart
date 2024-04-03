@@ -31,8 +31,7 @@ class HomePage extends StatelessWidget {
           children: [
             BlocBuilder<FavouriteCastBloc, FavouriteCastState>(
               builder: (context, state) {
-                final items =
-                    context.read<FavouriteCastBloc>().state.firstFiveItems;
+                final items = state.firstFiveItems;
                 return items.isEmpty
                     ? const SizedBox()
                     : Column(

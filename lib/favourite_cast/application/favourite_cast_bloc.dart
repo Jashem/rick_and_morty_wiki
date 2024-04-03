@@ -17,7 +17,7 @@ class FavouriteCastBloc extends Bloc<FavouriteCastEvent, FavouriteCastState> {
   final FavouriteCastFilterCubit _filterCubit;
 
   FavouriteCastBloc(this._repository, this._filterCubit)
-      : super(const FavouriteCastState.initial([])) {
+      : super(const FavouriteCastState.initial([], [])) {
     on<_FetchedAll>(_onFavouriteCastFetched);
     on<_AddedFavourite>(_onFavouriteCastAdded);
     on<_RemovedFavouite>(_onFavouriteCastRemoved);
@@ -27,18 +27,30 @@ class FavouriteCastBloc extends Bloc<FavouriteCastEvent, FavouriteCastState> {
     _FetchedAll event,
     Emitter<FavouriteCastState> emit,
   ) async {
-    emit(FavouriteCastState.loadInProgress(state.casts));
+    emit(FavouriteCastState.loadInProgress(state.casts, state.firstFiveItems));
     final failureOrRepos = await _repository.getFavouriteCasts(
       field: _filterCubit.state.field,
       value: _filterCubit.state.value,
     );
-    emit(failureOrRepos.fold(
+    final failureOrAllRepos = await _repository.getFavouriteCasts();
+    emit(failureOrAllRepos.fold(
       (l) => FavouriteCastState.loadFailure(
         state.casts,
+        state.allCasts,
         l,
       ),
       (r) {
-        return FavouriteCastState.loadSuccess(r);
+        return FavouriteCastState.loadSuccess(state.casts, r);
+      },
+    ));
+    emit(failureOrRepos.fold(
+      (l) => FavouriteCastState.loadFailure(
+        state.casts,
+        state.allCasts,
+        l,
+      ),
+      (r) {
+        return FavouriteCastState.loadSuccess(r, state.allCasts);
       },
     ));
   }
@@ -47,32 +59,37 @@ class FavouriteCastBloc extends Bloc<FavouriteCastEvent, FavouriteCastState> {
     _AddedFavourite event,
     Emitter<FavouriteCastState> emit,
   ) async {
-    final failureOrRepos = await _repository.saveCast(state.casts, event.cast);
-    emit(failureOrRepos.fold(
-      (l) => FavouriteCastState.loadFailure(
-        state.casts,
-        l,
-      ),
-      (r) {
-        return FavouriteCastState.loadSuccess(r);
+    final failureOrRepos = await _repository.saveCast(event.cast);
+    failureOrRepos.fold(
+      (l) {
+        emit(FavouriteCastState.loadFailure(
+          state.casts,
+          state.allCasts,
+          l,
+        ));
       },
-    ));
+      (r) {
+        add(const FavouriteCastEvent.fetchedAll());
+      },
+    );
   }
 
   Future<void> _onFavouriteCastRemoved(
     _RemovedFavouite event,
     Emitter<FavouriteCastState> emit,
   ) async {
-    final failureOrRepos =
-        await _repository.removeCast(state.casts, event.cast);
-    emit(failureOrRepos.fold(
-      (l) => FavouriteCastState.loadFailure(
-        state.casts,
-        l,
-      ),
-      (r) {
-        return FavouriteCastState.loadSuccess(r);
+    final failureOrRepos = await _repository.removeCast(event.cast);
+    failureOrRepos.fold(
+      (l) {
+        emit(FavouriteCastState.loadFailure(
+          state.casts,
+          state.allCasts,
+          l,
+        ));
       },
-    ));
+      (r) {
+        add(const FavouriteCastEvent.fetchedAll());
+      },
+    );
   }
 }

@@ -93,7 +93,7 @@ class SearchFilter extends StatelessWidget {
                 child: TextField(
                   controller: controller,
                   style: AppTextTheme.body2.copyWith(
-                    color: const Color.fromRGBO(134, 134, 134, 1),
+                    color: Colors.white,
                   ),
                   decoration: InputDecoration.collapsed(
                     hintText: "Search",
