@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../core/presenation/app_colors.dart';
-import '../../core/presenation/app_text_theme.dart';
+import 'app_colors.dart';
+import 'app_text_theme.dart';
 
 class ListHeader extends StatelessWidget {
   const ListHeader({
