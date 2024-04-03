@@ -14,9 +14,15 @@ class CastRepository {
 
   Future<Either<Failure, PaginatedData<List<Cast>>>> getCasts({
     int page = 1,
+    String? filterField,
+    String? filterValue,
   }) async {
     try {
-      final res = await _service.getCharacters(page: page);
+      final res = await _service.getCharacters(
+        page: page,
+        filterField: filterField,
+        filterValue: filterValue,
+      );
       final domain = res.data.characters;
       return right(
         PaginatedData(

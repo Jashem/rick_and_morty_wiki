@@ -10,13 +10,26 @@ import '../../core/presenation/gaps.dart';
 import '../../core/presenation/page_scaffold.dart';
 import '../../core/presenation/page_title.dart';
 import '../../core/presenation/pagination_view.dart';
-import '../../core/presenation/routes/app_router.dart';
+import '../../core/presenation/search_filter.dart';
 import '../application/cast_cubit.dart';
+import '../application/cast_filter/cast_filter_cubit.dart';
 import '../domain/cast.dart';
 
 @RoutePage()
-class CastPage extends StatelessWidget {
+class CastPage extends StatefulWidget {
   const CastPage({super.key});
+
+  @override
+  State<CastPage> createState() => _CastPageState();
+}
+
+class _CastPageState extends State<CastPage> {
+  late final TextEditingController _searchController;
+  @override
+  void initState() {
+    _searchController = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +39,34 @@ class CastPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            BlocListener<CastFilterCubit, CastFilterState>(
+              listenWhen: (previous, current) =>
+                  previous.field != current.field,
+              listener: (context, state) {
+                _searchController.text = state.value;
+                context.read<CastCubit>().getFirstCstPage();
+              },
+              child: BlocBuilder<CastFilterCubit, CastFilterState>(
+                builder: (context, state) {
+                  return SearchFilter(
+                    controller: _searchController,
+                    filter: const [
+                      "name",
+                      "status",
+                      "species",
+                      "type",
+                      "gender",
+                    ],
+                    selectedFilter: state.field,
+                    onFilterChanged:
+                        context.read<CastFilterCubit>().changeField,
+                    onSearchTapped: context.read<CastCubit>().getFirstCstPage,
+                    onValueChanged: context.read<CastFilterCubit>().changeValue,
+                  );
+                },
+              ),
+            ),
+            24.vGap,
             const PageTitle(
               title: "All Cast",
             ),

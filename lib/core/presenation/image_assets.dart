@@ -23,7 +23,12 @@ class ImageAssets {
   static String get share => 'share'.svg;
   static String get species => 'species'.svg;
   static String get status => 'status'.svg;
+  static String get search_bar => 'search_bar'.svg;
   static String get rectangle_box => 'rectangle_box'.svg;
+  static String get arrow_down => 'arrow_down'.svg;
+  static String get radio => 'radio'.svg;
+  static String get radio_fill => 'radio_fill'.svg;
+  static String get search => 'search'.svg;
 }
 
 extension on String {

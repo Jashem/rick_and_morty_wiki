@@ -10,10 +10,15 @@ class CastService {
 
   Future<CharactersDataDTO> getCharacters({
     int page = 1,
+    String? filterField,
+    String? filterValue,
   }) async {
-    var query = '''
+    final filter = (filterField != null && filterValue != null)
+        ? 'filter: {$filterField: "$filterValue"}'
+        : 'filter: {}';
+    final query = '''
                   query {
-                    characters(page: $page) {
+                    characters(page: $page, $filter) {
                       info {
                         count
                         pages

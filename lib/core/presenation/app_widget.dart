@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cast/application/cast_cubit.dart';
+import '../../cast/application/cast_filter/cast_filter_cubit.dart';
 import '../../cast/infrastructure/cast_repository.dart';
 import '../../favourite_cast/application/favourite_cast_bloc.dart';
 import '../../favourite_cast/infrastructure/favourite_cast_repository.dart';
@@ -22,8 +23,12 @@ class _AppWidgetState extends State<AppWidget> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) =>
-              CastCubit(di.get<CastRepository>())..getFirstCstPage(),
+          create: (context) => CastFilterCubit(),
+        ),
+        BlocProvider(
+          create: (context) => CastCubit(
+              di.get<CastRepository>(), context.read<CastFilterCubit>())
+            ..getFirstCstPage(),
         ),
         BlocProvider(
           create: (context) =>
