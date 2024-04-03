@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../cast/domain/cast.dart';
 import '../../core/domain/failure.dart';
 import '../infrastructure/favourite_cast_repository.dart';
+import 'favourite_cast_filter/cast_filter_cubit.dart';
 
 part 'favourite_cast_event.dart';
 part 'favourite_cast_state.dart';
@@ -13,7 +14,9 @@ part 'favourite_cast_bloc.freezed.dart';
 
 class FavouriteCastBloc extends Bloc<FavouriteCastEvent, FavouriteCastState> {
   final FavouriteCastRepository _repository;
-  FavouriteCastBloc(this._repository)
+  final FavouriteCastFilterCubit _filterCubit;
+
+  FavouriteCastBloc(this._repository, this._filterCubit)
       : super(const FavouriteCastState.initial([])) {
     on<_FetchedAll>(_onFavouriteCastFetched);
     on<_AddedFavourite>(_onFavouriteCastAdded);
@@ -25,8 +28,10 @@ class FavouriteCastBloc extends Bloc<FavouriteCastEvent, FavouriteCastState> {
     Emitter<FavouriteCastState> emit,
   ) async {
     emit(FavouriteCastState.loadInProgress(state.casts));
-
-    final failureOrRepos = await _repository.getFavouriteCasts();
+    final failureOrRepos = await _repository.getFavouriteCasts(
+      field: _filterCubit.state.field,
+      value: _filterCubit.state.value,
+    );
     emit(failureOrRepos.fold(
       (l) => FavouriteCastState.loadFailure(
         state.casts,

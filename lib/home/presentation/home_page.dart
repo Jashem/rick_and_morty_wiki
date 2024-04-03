@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
                           ListHeader(
                             title: "Favourites",
                             onViewAllTap: () {
-                              context.navigateTo(const CastRoute());
+                              context.navigateTo(const FavouriteCastRoute());
                             },
                           ),
                           SizedBox(

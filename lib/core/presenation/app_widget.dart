@@ -4,6 +4,7 @@ import '../../cast/application/cast_cubit.dart';
 import '../../cast/application/cast_filter/cast_filter_cubit.dart';
 import '../../cast/infrastructure/cast_repository.dart';
 import '../../favourite_cast/application/favourite_cast_bloc.dart';
+import '../../favourite_cast/application/favourite_cast_filter/cast_filter_cubit.dart';
 import '../../favourite_cast/infrastructure/favourite_cast_repository.dart';
 import '../shared/dependency_injection.dart';
 import 'routes/app_router.dart';
@@ -26,14 +27,18 @@ class _AppWidgetState extends State<AppWidget> {
           create: (context) => CastFilterCubit(),
         ),
         BlocProvider(
+          create: (context) => FavouriteCastFilterCubit(),
+        ),
+        BlocProvider(
           create: (context) => CastCubit(
               di.get<CastRepository>(), context.read<CastFilterCubit>())
             ..getFirstCstPage(),
         ),
         BlocProvider(
-          create: (context) =>
-              FavouriteCastBloc(di.get<FavouriteCastRepository>())
-                ..add(const FavouriteCastEvent.fetchedAll()),
+          create: (context) => FavouriteCastBloc(
+              di.get<FavouriteCastRepository>(),
+              context.read<FavouriteCastFilterCubit>())
+            ..add(const FavouriteCastEvent.fetchedAll()),
         ),
       ],
       child: MaterialApp.router(

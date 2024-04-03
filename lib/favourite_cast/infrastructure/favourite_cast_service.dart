@@ -27,12 +27,72 @@ class FavouriteCastService {
   }
 
   Future<List<CastDTO>> getFavourites() async {
-    final pref = await _preferences;
-    final res = pref.getString(key);
-    if (res == null) {
-      return [];
+    return apiCallWrapper(() async {
+      final pref = await _preferences;
+      final res = pref.getString(key);
+      if (res == null) {
+        return [];
+      }
+      final maps = jsonDecode(res) as List;
+      return maps.toDTO();
+    });
+  }
+
+  Future<List<CastDTO>> getFavouritesByName(String? value) async {
+    final favourites = await getFavourites();
+    if (value == null || value.isEmpty) {
+      return favourites;
     }
-    final maps = jsonDecode(res) as List;
-    return maps.toDTO();
+    return favourites
+        .where((element) =>
+            element.name?.toLowerCase().contains(value.toLowerCase()) ?? false)
+        .toList();
+  }
+
+  Future<List<CastDTO>> getFavouritesByStatus(String? value) async {
+    final favourites = await getFavourites();
+    if (value == null || value.isEmpty) {
+      return favourites;
+    }
+    return favourites
+        .where((element) =>
+            element.status?.toLowerCase().contains(value.toLowerCase()) ??
+            false)
+        .toList();
+  }
+
+  Future<List<CastDTO>> getFavouritesBySpecies(String? value) async {
+    final favourites = await getFavourites();
+    if (value == null || value.isEmpty) {
+      return favourites;
+    }
+    return favourites
+        .where((element) =>
+            element.species?.toLowerCase().contains(value.toLowerCase()) ??
+            false)
+        .toList();
+  }
+
+  Future<List<CastDTO>> getFavouritesByType(String? value) async {
+    final favourites = await getFavourites();
+    if (value == null || value.isEmpty) {
+      return favourites;
+    }
+    return favourites
+        .where((element) =>
+            element.type?.toLowerCase().contains(value.toLowerCase()) ?? false)
+        .toList();
+  }
+
+  Future<List<CastDTO>> getFavouritesByGender(String? value) async {
+    final favourites = await getFavourites();
+    if (value == null || value.isEmpty) {
+      return favourites;
+    }
+    return favourites
+        .where((element) =>
+            element.gender?.toLowerCase().contains(value.toLowerCase()) ??
+            false)
+        .toList();
   }
 }

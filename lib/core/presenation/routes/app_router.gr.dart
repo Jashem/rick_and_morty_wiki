@@ -49,6 +49,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const EpisodesPage(),
       );
     },
+    FavouriteCastRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FavouriteCastPage(),
+      );
+    },
     HomeRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -160,6 +166,20 @@ class EpisodesRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'EpisodesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [FavouriteCastPage]
+class FavouriteCastRoute extends PageRouteInfo<void> {
+  const FavouriteCastRoute({List<PageRouteInfo>? children})
+      : super(
+          FavouriteCastRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FavouriteCastRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

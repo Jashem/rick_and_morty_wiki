@@ -7,6 +7,7 @@ import '../../../cast/presentation/cast_page.dart';
 import '../../../cast/presentation/cast_router_page.dart';
 import '../../../cast_details/presentation/cast_details_page.dart';
 import '../../../episodes/presentation/episodes_page.dart';
+import '../../../favourite_cast/presentation/favourite_cast_page.dart';
 import '../../../home/presentation/home_page.dart';
 import '../../../locations/presentation/locations_page.dart';
 import '../../../splash/presentation/splash_page.dart';
@@ -35,6 +36,7 @@ class AppRouter extends _$AppRouter {
               children: [
                 AutoRoute(page: CastRoute.page, path: ""),
                 AutoRoute(page: CastDetailsRoute.page, path: "details"),
+                AutoRoute(page: FavouriteCastRoute.page, path: "details"),
                 RedirectRoute(path: '*', redirectTo: ''),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/application/filter_state.dart';
 import '../../core/application/paginated_items/paginated_items_cubit.dart';
 import '../../core/presenation/app_colors.dart';
 import '../../core/presenation/app_text_theme.dart';
@@ -11,6 +12,7 @@ import '../../core/presenation/page_scaffold.dart';
 import '../../core/presenation/page_title.dart';
 import '../../core/presenation/pagination_view.dart';
 import '../../core/presenation/search_filter.dart';
+import '../../core/shared/constants.dart';
 import '../application/cast_cubit.dart';
 import '../application/cast_filter/cast_filter_cubit.dart';
 import '../domain/cast.dart';
@@ -39,7 +41,7 @@ class _CastPageState extends State<CastPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BlocConsumer<CastFilterCubit, CastFilterState>(
+            BlocConsumer<CastFilterCubit, FilterState>(
               listenWhen: (previous, current) =>
                   previous.field != current.field,
               listener: (context, state) {
@@ -49,13 +51,7 @@ class _CastPageState extends State<CastPage> {
               builder: (context, state) {
                 return SearchFilter(
                   controller: _searchController,
-                  filter: const [
-                    "name",
-                    "status",
-                    "species",
-                    "type",
-                    "gender",
-                  ],
+                  filter: kCastFilters,
                   selectedFilter: state.field,
                   onFilterChanged: context.read<CastFilterCubit>().changeField,
                   onSearchTapped: context.read<CastCubit>().getFirstCstPage,
