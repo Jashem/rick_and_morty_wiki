@@ -22,9 +22,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     CastDetailsRoute.name: (routeData) {
+      final args = routeData.argsAs<CastDetailsRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const CastDetailsPage(),
+        child: CastDetailsPage(
+          key: args.key,
+          cast: args.cast,
+        ),
       );
     },
     CastRoute.name: (routeData) {
@@ -82,16 +86,40 @@ class BottomNavRoute extends PageRouteInfo<void> {
 
 /// generated route for
 /// [CastDetailsPage]
-class CastDetailsRoute extends PageRouteInfo<void> {
-  const CastDetailsRoute({List<PageRouteInfo>? children})
-      : super(
+class CastDetailsRoute extends PageRouteInfo<CastDetailsRouteArgs> {
+  CastDetailsRoute({
+    Key? key,
+    required Cast cast,
+    List<PageRouteInfo>? children,
+  }) : super(
           CastDetailsRoute.name,
+          args: CastDetailsRouteArgs(
+            key: key,
+            cast: cast,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CastDetailsRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<CastDetailsRouteArgs> page =
+      PageInfo<CastDetailsRouteArgs>(name);
+}
+
+class CastDetailsRouteArgs {
+  const CastDetailsRouteArgs({
+    this.key,
+    required this.cast,
+  });
+
+  final Key? key;
+
+  final Cast cast;
+
+  @override
+  String toString() {
+    return 'CastDetailsRouteArgs{key: $key, cast: $cast}';
+  }
 }
 
 /// generated route for

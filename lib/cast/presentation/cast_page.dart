@@ -39,32 +39,29 @@ class _CastPageState extends State<CastPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            BlocListener<CastFilterCubit, CastFilterState>(
+            BlocConsumer<CastFilterCubit, CastFilterState>(
               listenWhen: (previous, current) =>
                   previous.field != current.field,
               listener: (context, state) {
                 _searchController.text = state.value;
                 context.read<CastCubit>().getFirstCstPage();
               },
-              child: BlocBuilder<CastFilterCubit, CastFilterState>(
-                builder: (context, state) {
-                  return SearchFilter(
-                    controller: _searchController,
-                    filter: const [
-                      "name",
-                      "status",
-                      "species",
-                      "type",
-                      "gender",
-                    ],
-                    selectedFilter: state.field,
-                    onFilterChanged:
-                        context.read<CastFilterCubit>().changeField,
-                    onSearchTapped: context.read<CastCubit>().getFirstCstPage,
-                    onValueChanged: context.read<CastFilterCubit>().changeValue,
-                  );
-                },
-              ),
+              builder: (context, state) {
+                return SearchFilter(
+                  controller: _searchController,
+                  filter: const [
+                    "name",
+                    "status",
+                    "species",
+                    "type",
+                    "gender",
+                  ],
+                  selectedFilter: state.field,
+                  onFilterChanged: context.read<CastFilterCubit>().changeField,
+                  onSearchTapped: context.read<CastCubit>().getFirstCstPage,
+                  onValueChanged: context.read<CastFilterCubit>().changeValue,
+                );
+              },
             ),
             24.vGap,
             const PageTitle(

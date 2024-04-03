@@ -76,7 +76,7 @@ class SearchFilter extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "Status",
+                        selectedFilter,
                         style: AppTextTheme.caption1Strong
                             .copyWith(color: Colors.white),
                       ),

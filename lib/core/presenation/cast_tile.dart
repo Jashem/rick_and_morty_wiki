@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -5,6 +6,7 @@ import '../../cast/domain/cast.dart';
 import 'app_text_theme.dart';
 import 'cast_favorite_box.dart';
 import 'image_assets.dart';
+import 'routes/app_router.dart';
 
 class CastTile extends StatelessWidget {
   const CastTile({
@@ -18,7 +20,10 @@ class CastTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context
+            .navigateTo(CastRouter(children: [CastDetailsRoute(cast: cast)]));
+      },
       child: LayoutBuilder(builder: (context, constraints) {
         return Stack(
           children: [

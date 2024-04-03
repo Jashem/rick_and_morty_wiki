@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
 import '../../../bottom_nav/presentation/bottom_nav_page.dart';
 
+import '../../../cast/domain/cast.dart';
 import '../../../cast/presentation/cast_page.dart';
 import '../../../cast/presentation/cast_router_page.dart';
 import '../../../cast_details/presentation/cast_details_page.dart';

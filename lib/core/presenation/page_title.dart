@@ -14,6 +14,7 @@ class PageTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
+      textAlign: TextAlign.center,
       title,
       style: AppTextTheme.title2.copyWith(color: AppColors.secondary),
     );

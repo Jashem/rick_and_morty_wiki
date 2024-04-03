@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
+import '../../cast/domain/cast.dart';
 import '../../core/presenation/app_text_theme.dart';
 import '../../core/presenation/gaps.dart';
 import '../../core/presenation/gradient_box.dart';
@@ -11,7 +12,8 @@ import 'info_card.dart';
 
 @RoutePage()
 class CastDetailsPage extends StatelessWidget {
-  const CastDetailsPage({super.key});
+  const CastDetailsPage({super.key, required this.cast});
+  final Cast cast;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CastDetailsPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const PageTitle(title: "Rick Sanchez"),
+            PageTitle(title: cast.name),
             20.vGap,
             GradientBox(
               child: Padding(
@@ -33,7 +35,7 @@ class CastDetailsPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Image.network(
-                    "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                    cast.image,
                     height: 180,
                     width: 180,
                     fit: BoxFit.cover,
@@ -48,7 +50,7 @@ class CastDetailsPage extends StatelessWidget {
                   child: InfoCard(
                     iconPath: ImageAssets.status,
                     title: "Status",
-                    subtitle: "Alive",
+                    subtitle: cast.status,
                   ),
                 ),
                 16.hGap,
@@ -56,7 +58,7 @@ class CastDetailsPage extends StatelessWidget {
                   child: InfoCard(
                     iconPath: ImageAssets.species,
                     title: "Species",
-                    subtitle: "Human",
+                    subtitle: cast.species,
                   ),
                 ),
                 16.hGap,
@@ -64,7 +66,7 @@ class CastDetailsPage extends StatelessWidget {
                   child: InfoCard(
                     iconPath: ImageAssets.gender,
                     title: "Gender",
-                    subtitle: "Male",
+                    subtitle: cast.gender,
                   ),
                 ),
               ],
@@ -75,7 +77,7 @@ class CastDetailsPage extends StatelessWidget {
               child: InfoCard(
                 iconPath: ImageAssets.origin,
                 title: "Origin",
-                subtitle: "Earth (C-137)",
+                subtitle: cast.origin.name,
               ),
             ),
             15.vGap,
@@ -84,37 +86,39 @@ class CastDetailsPage extends StatelessWidget {
               child: InfoCard(
                 iconPath: ImageAssets.location,
                 title: "Last Known Location",
-                subtitle: "Citadel of Ricks",
+                subtitle: cast.location.name,
               ),
             ),
             15.vGap,
             SizedBox(
               width: double.maxFinite,
               child: InfoCard(
-                iconPath: ImageAssets.location,
-                title: "Last Known Location",
+                iconPath: ImageAssets.episode,
+                title: "Episode(s)",
                 subtitleWidget: Column(
                   children: [
                     8.vGap,
-                    Row(
-                      children: [
-                        Container(
-                          height: 8,
-                          width: 8,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                        ),
-                        8.hGap,
-                        Text(
-                          "Lawnmower Dog",
-                          style: AppTextTheme.body1.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                    ...cast.episode.map((e) => Row(
+                          children: [
+                            Container(
+                              height: 8,
+                              width: 8,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.white,
+                              ),
+                            ),
+                            8.hGap,
+                            Flexible(
+                              child: Text(
+                                e.name,
+                                style: AppTextTheme.body1.copyWith(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
                   ],
                 ),
               ),
