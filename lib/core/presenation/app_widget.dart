@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cast/application/cast_cubit.dart';
 import '../../cast/application/cast_filter/cast_filter_cubit.dart';
 import '../../cast/infrastructure/cast_repository.dart';
+import '../../episodes/application/episode_cubit.dart';
+import '../../episodes/application/episode_filter/episode_filter_cubit.dart';
+import '../../episodes/infrastructure/episode_repository.dart';
 import '../../favourite_cast/application/favourite_cast_bloc.dart';
 import '../../favourite_cast/application/favourite_cast_filter/cast_filter_cubit.dart';
 import '../../favourite_cast/infrastructure/favourite_cast_repository.dart';
@@ -30,9 +33,17 @@ class _AppWidgetState extends State<AppWidget> {
           create: (context) => FavouriteCastFilterCubit(),
         ),
         BlocProvider(
+          create: (context) => EpisodeFilterCubit(),
+        ),
+        BlocProvider(
           create: (context) => CastCubit(
               di.get<CastRepository>(), context.read<CastFilterCubit>())
             ..getFirstCstPage(),
+        ),
+        BlocProvider(
+          create: (context) => EpisodeCubit(
+              di.get<EpisodeRepository>(), context.read<EpisodeFilterCubit>())
+            ..getFirstEpisodePage(),
         ),
         BlocProvider(
           create: (context) => FavouriteCastBloc(

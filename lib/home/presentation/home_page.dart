@@ -10,6 +10,9 @@ import '../../core/presenation/page_scaffold.dart';
 import '../../core/presenation/text_tile.dart';
 import '../../core/shared/dependency_injection.dart';
 import '../../core/presenation/list_header.dart';
+import '../../episodes/application/episodes_carousal/episodes_carousal_cubit.dart';
+import '../../episodes/infrastructure/episode_repository.dart';
+import '../../episodes/presentation/episode_carousal_view.dart';
 import '../../favourite_cast/presentation/favourite_carousal_view.dart';
 
 @RoutePage()
@@ -18,9 +21,17 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          CastCarousalCubit(di.get<CastRepository>())..fetchInitialCasts(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              CastCarousalCubit(di.get<CastRepository>())..fetchInitialCasts(),
+        ),
+        BlocProvider(
+          create: (context) => EpisodeCarousalCubit(di.get<EpisodeRepository>())
+            ..fetchInitialEpisodes(),
+        ),
+      ],
       child: PageScaffold(
         body: SingleChildScrollView(
           padding: const EdgeInsets.only(
@@ -33,7 +44,6 @@ class HomePage extends StatelessWidget {
             children: [
               const FavouriteCarousalView(),
               const CastCarousalView(),
-              40.vGap,
               ListHeader(
                 title: "Locations",
                 onViewAllTap: () {},
@@ -55,26 +65,7 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               40.vGap,
-              ListHeader(
-                title: "Episodes",
-                onViewAllTap: () {},
-              ),
-              SizedBox(
-                height: 46,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) => SizedBox(
-                    width: 177,
-                    child: TextTile(
-                      onTap: () {},
-                      title: "S01 E01",
-                      subtitle: "Pilot",
-                    ),
-                  ),
-                  separatorBuilder: (context, index) => 24.hGap,
-                  itemCount: 5,
-                ),
-              ),
+              const EpisodeCarousalView(),
             ],
           ),
         ),

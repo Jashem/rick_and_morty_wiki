@@ -2,42 +2,46 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/presenation/cast_tile.dart';
 import '../../core/presenation/gaps.dart';
 import '../../core/presenation/list_header.dart';
 import '../../core/presenation/routes/app_router.dart';
-import '../application/casts_carousal/casts_carousal_cubit.dart';
+import '../../core/presenation/text_tile.dart';
+import '../application/episodes_carousal/episodes_carousal_cubit.dart';
 
-class CastCarousalView extends StatelessWidget {
-  const CastCarousalView({super.key});
+class EpisodeCarousalView extends StatelessWidget {
+  const EpisodeCarousalView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CastCarousalCubit, CastCarousalState>(
+    return BlocBuilder<EpisodeCarousalCubit, EpisodeCarousalState>(
       builder: (context, state) {
-        final items = state.casts;
+        final items = state.episodes;
         return items.isEmpty
             ? const SizedBox()
             : Column(
                 children: [
                   ListHeader(
-                    title: "Meet the cast",
+                    title: "Episodes",
                     onViewAllTap: () {
-                      context.navigateTo(const CastRoute());
+                      context.navigateTo(const EpisodesRoute());
                     },
                   ),
                   SizedBox(
-                    height: 137,
+                    height: 46,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) => CastTile(
-                        cast: items[index],
+                      itemBuilder: (context, index) => SizedBox(
+                        width: 177,
+                        child: TextTile(
+                          onTap: () {},
+                          title: items[index].episode,
+                          subtitle: items[index].name,
+                        ),
                       ),
                       separatorBuilder: (context, index) => 15.hGap,
                       itemCount: items.length,
                     ),
                   ),
-                  40.vGap,
                 ],
               );
       },

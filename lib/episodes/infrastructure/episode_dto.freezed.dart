@@ -22,6 +22,7 @@ EpisodeDTO _$EpisodeDTOFromJson(Map<String, dynamic> json) {
 mixin _$EpisodeDTO {
   String get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
+  String? get episode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $EpisodeDTOCopyWith<$Res> {
           EpisodeDTO value, $Res Function(EpisodeDTO) then) =
       _$EpisodeDTOCopyWithImpl<$Res, EpisodeDTO>;
   @useResult
-  $Res call({String id, String? name});
+  $Res call({String id, String? name, String? episode});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$EpisodeDTOCopyWithImpl<$Res, $Val extends EpisodeDTO>
   $Res call({
     Object? id = null,
     Object? name = freezed,
+    Object? episode = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -62,6 +64,10 @@ class _$EpisodeDTOCopyWithImpl<$Res, $Val extends EpisodeDTO>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      episode: freezed == episode
+          ? _value.episode
+          : episode // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -75,7 +81,7 @@ abstract class _$$EpisodeDTOImplCopyWith<$Res>
       __$$EpisodeDTOImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String? name});
+  $Res call({String id, String? name, String? episode});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$EpisodeDTOImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = freezed,
+    Object? episode = freezed,
   }) {
     return _then(_$EpisodeDTOImpl(
       id: null == id
@@ -101,6 +108,10 @@ class __$$EpisodeDTOImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      episode: freezed == episode
+          ? _value.episode
+          : episode // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -108,7 +119,7 @@ class __$$EpisodeDTOImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$EpisodeDTOImpl extends _EpisodeDTO {
-  _$EpisodeDTOImpl({required this.id, this.name}) : super._();
+  _$EpisodeDTOImpl({required this.id, this.name, this.episode}) : super._();
 
   factory _$EpisodeDTOImpl.fromJson(Map<String, dynamic> json) =>
       _$$EpisodeDTOImplFromJson(json);
@@ -117,10 +128,12 @@ class _$EpisodeDTOImpl extends _EpisodeDTO {
   final String id;
   @override
   final String? name;
+  @override
+  final String? episode;
 
   @override
   String toString() {
-    return 'EpisodeDTO(id: $id, name: $name)';
+    return 'EpisodeDTO(id: $id, name: $name, episode: $episode)';
   }
 
   @override
@@ -129,12 +142,13 @@ class _$EpisodeDTOImpl extends _EpisodeDTO {
         (other.runtimeType == runtimeType &&
             other is _$EpisodeDTOImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.episode, episode) || other.episode == episode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, episode);
 
   @JsonKey(ignore: true)
   @override
@@ -151,8 +165,10 @@ class _$EpisodeDTOImpl extends _EpisodeDTO {
 }
 
 abstract class _EpisodeDTO extends EpisodeDTO {
-  factory _EpisodeDTO({required final String id, final String? name}) =
-      _$EpisodeDTOImpl;
+  factory _EpisodeDTO(
+      {required final String id,
+      final String? name,
+      final String? episode}) = _$EpisodeDTOImpl;
   _EpisodeDTO._() : super._();
 
   factory _EpisodeDTO.fromJson(Map<String, dynamic> json) =
@@ -162,6 +178,8 @@ abstract class _EpisodeDTO extends EpisodeDTO {
   String get id;
   @override
   String? get name;
+  @override
+  String? get episode;
   @override
   @JsonKey(ignore: true)
   _$$EpisodeDTOImplCopyWith<_$EpisodeDTOImpl> get copyWith =>

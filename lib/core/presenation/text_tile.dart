@@ -39,10 +39,12 @@ class TextTile extends StatelessWidget {
                 children: [
                   Text(
                     title,
+                    overflow: TextOverflow.ellipsis,
                     style: AppTextTheme.title4.copyWith(color: Colors.white),
                   ),
                   Text(
                     subtitle,
+                    overflow: TextOverflow.ellipsis,
                     style: AppTextTheme.caption1Strong
                         .copyWith(color: Colors.white),
                   ),

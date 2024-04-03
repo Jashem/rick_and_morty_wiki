@@ -10,10 +10,12 @@ _$EpisodeDTOImpl _$$EpisodeDTOImplFromJson(Map<String, dynamic> json) =>
     _$EpisodeDTOImpl(
       id: json['id'] as String,
       name: json['name'] as String?,
+      episode: json['episode'] as String?,
     );
 
 Map<String, dynamic> _$$EpisodeDTOImplToJson(_$EpisodeDTOImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'episode': instance.episode,
     };

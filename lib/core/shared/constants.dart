@@ -5,3 +5,12 @@ const kCastFilters = [
   "type",
   "gender",
 ];
+const kLocationFilters = [
+  "name",
+  "type",
+  "dimension",
+];
+const kEpisodeFilters = [
+  "name",
+  "episode",
+];
